@@ -75,12 +75,15 @@ testid="/tmp/.vochaintest$RANDOM"
 	test_csp ${testid}4 &
 } || echo 0 >${testid}4
 
+echo "### Waiting for voting tests to finish ###"
+wait
+
 [ $TEST -eq 5 -o $TEST -eq 0 ] && {
 	echo "### Running test 5 ###"
 	test_token_transactions ${testid}5 &
 } || echo 0 >${testid}5
 
-echo "### Waiting for tests to finish ###"
+echo "### Waiting for token transaction tests to finish ###"
 wait
 
 [ "$(cat ${testid}1)" == "0" -a "$(cat ${testid}2)" == "0" -a "$(cat ${testid}3)" == "0" \
